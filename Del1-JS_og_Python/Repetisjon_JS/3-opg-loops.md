@@ -78,7 +78,6 @@ for (let i = 1; i <= 10; i++) {
 18. Les inn en liste med tall (kommaseparert) og finn summen.
 19. Les inn en liste med tall (kommaseparert) og finn det største tallet.
 20. Les inn en liste med tall (kommaseparert) og lag et nytt array med bare tall større enn 5.
-
 ---
 
 
