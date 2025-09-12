@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gjøremålsliste</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Gjøremålsliste</h1>
+    <p class="tagline">Legg til oppgaver, slett ferdige, og hold tellingen</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Nytt gjøremål</h2>
+      <form id="skjemaOppgave">
+        <div class="field">
+          <label for="inpTekst">Oppgave</label>
+          <input id="inpTekst" type="text" placeholder="F.eks. Lekse i matte" required />
+        </div>
+        <div class="actions">
+          <button id="btnLeggTil" type="submit">Legg til</button>
+        </div>
+      </form>
+      <p id="utMelding" class="melding"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Mine gjøremål</h2>
+      <ul id="utListe"></ul>
+
+      <div class="delestreker"></div>
+
+      <div class="totaler">
+        <p id="utAntallTotal">Antall oppgaver: 0</p>
+      </div>
+
+      <div class="delestreker"></div>
+
+      <h3>Slett oppgave</h3>
+      <div class="field">
+        <label for="inpIndex">Skriv inn index (nummer) på oppgaven du vil slette</label>
+        <input id="inpIndex" type="number" min="0" />
+      </div>
+      <div class="actions">
+        <button id="btnSlett" type="button">Slett oppgave</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Gjøremålsliste 2025</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
