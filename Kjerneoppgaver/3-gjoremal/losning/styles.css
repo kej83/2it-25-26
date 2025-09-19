@@ -1,0 +1,79 @@
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #f1f5f9;      /* slate-100 */
+  --panel: #ffffff;   /* hvit */
+  --text: #111827;    /* gray-900 */
+  --muted: #475569;   /* slate-600 */
+  --brand: #3b82f6;   /* blue-500 */
+  --brand-2: #2563eb; /* blue-600 */
+  --danger: #ef4444;  /* red-500 */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header { padding: 2rem 1rem 1rem; text-align: center; }
+h1 { margin: 0; font-size: 2rem; }
+.tagline { margin: .25rem 0 0; color: var(--muted); }
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,.05);
+}
+
+.field { display: grid; gap: .4rem; margin-bottom: .8rem; }
+label { color: var(--muted); font-size: .9rem; }
+input { padding: .6rem .7rem; border-radius: 10px; border: 1px solid #cbd5e1; }
+
+.actions { display: flex; gap: .6rem; margin-top: .4rem; }
+button {
+  padding: .6rem .9rem;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: linear-gradient(180deg, var(--brand), var(--brand-2));
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.05); }
+button#btnTøm { background: linear-gradient(180deg, #fca5a5, var(--danger)); }
+
+.melding { min-height: 1.2rem; color: var(--brand-2); }
+.delestreker { border-top: 1px dashed #94a3b8; margin: .6rem 0; }
+.totaler { display: grid; gap: .2rem; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+ul li {
+  padding: .5rem .6rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ul li.done { text-decoration: line-through; color: #64748b; background: #f8fafc; }
+
+/* Fiks: sentrer footer */
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem 1rem 2.5rem;
+}
