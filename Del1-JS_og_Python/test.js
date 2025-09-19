@@ -1,9 +1,13 @@
-let rute = process.argv;
-console.log(rute);
-console.log(rute.slice(2));
-// rute = rute.slice(2);
-// console.log("Start reiserute:", rute.join(" → "));
+let fib = [0, 1];
 
-// let rute = process.argv.slice(2);
+let next = fib[0] + fib[1];
+// legg til tallet i arrayet
+fib.push(next);
 
-// console.log("Start reiserute:", rute.join(" → "));
+next = fib[1] + fib[2];
+fib.push(next);
+
+next = fib[2] + fib[3];
+fib.push(next);
+
+console.log(fib);
