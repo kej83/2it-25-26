@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logg inn</title>
+    <script src="script.js" defer></script>
+    <style>
+        #loggInnContainer {
+            width:50%;
+            margin-left:25%;
+        }
+        form > * {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="loggInnContainer">
+    <h1>Logg inn (ett objekt)</h1>
+
+    <form id="skjema">
+        <label for="inpUser">Username:</label>
+        <input type="text" id="inpUser">
+        <label for="inpUser">Password:</label>
+        <input type="password" id="inpPassword">
+        <input type="submit" value="Logg inn">
+    </form>
+
+    <p id="txtUt"></p>
+    </div>
+</body>
+</html>
