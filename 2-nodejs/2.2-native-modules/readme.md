@@ -25,4 +25,4 @@ Do this
 1. Change the `message.txt` by adding a new line with i.e. "yo from tha hood". Save it.
 2. Figure out how to add a readfile function to print the file contents to the terminal.
 3. Comment out the writefile function before you run it.
-4. Hint: add the utf8 encoding as an option.
+4. Hint: add the utf8 encoding as an option. Try without to see raw buffer output.
