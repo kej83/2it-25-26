@@ -28,14 +28,20 @@
             </tr>
         </thead>
         <!-- HER bruker du ejs med for-løkke. ET nytt tr (ny rad) for hver sang -->
+         <tbody>
+            <% for(let i=0; i<lydfiler.length;i++) { %> 
+                <% 
+                let filnavn = lydfiler[i].split(".");
+                let tittel = filnavn[0];
+                let type = filnavn[1];
+                %>
         <tr>
-            <td>koko</td>
-            <td>wav</td>
+            <td><%= tittel %></td>
+            <td><%= type %></td>
         </tr>
-        <tr>
-            <td>yo</td>
-        <td>mp3</td>
-    </tr>
+        <% } %>
+
+</tbody>
     </table>
 </body>
 </html>
