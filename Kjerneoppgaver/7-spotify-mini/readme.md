@@ -284,7 +284,7 @@ npm run dev
 På serveren:
 
 ```js
-res.render("index", { songs });
+res.render("index.ejs", { songs });
 ```
 
 I `index.ejs` har dere direkte tilgang til `songs`:
