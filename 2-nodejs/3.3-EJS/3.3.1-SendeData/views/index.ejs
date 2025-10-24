@@ -10,5 +10,32 @@
     <p>Min favorittfrukt er 
         <%= minFrukt %>
     </p>
+    <h2>Mine venner</h2>
+    <ul>
+    
+   <% for (let i=0; i<venner.length ;i++) { %>
+    <li><%= venner[i] %></li>
+    <% } %>
+    </ul>
+
+    <!-- Oppgave: For hver lydfil lag en ny rad i tabellen. 2 kolonner. Første kolonne har tittelen på sangen. Andre kolonne har filtypen (mp3/wav). -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sangtittel</th>
+                <th>Filtype</th>
+            </tr>
+        </thead>
+        <!-- HER bruker du ejs med for-løkke. ET nytt tr (ny rad) for hver sang -->
+        <tr>
+            <td>koko</td>
+            <td>wav</td>
+        </tr>
+        <tr>
+            <td>yo</td>
+        <td>mp3</td>
+    </tr>
+    </table>
 </body>
 </html>
