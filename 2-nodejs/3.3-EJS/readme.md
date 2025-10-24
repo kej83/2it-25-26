@@ -16,9 +16,9 @@ npm i express ejs nodemon
 ```json
 "type": "module",
 ```
-Under `scripts`legg til :
+Under `scripts`legg til på siste linje :
 ```json
-"start": "npx nodemon app.js",
+"start": "npx nodemon app.js"
 ```
 
 4. Lag filen `app.js`.
