@@ -10,6 +10,9 @@ app.get("/", (req, res) => {
         venner:["jens","per","ea"],
         lydfiler: ["koko.wav","yo.mp3","mornajens.wav","donald.mp3"]
     }
+    // HINT:
+    console.log("koko.mp3".split(".")[0])
+    console.log("koko.mp3".split(".")[1])
     res.render("index.ejs", data);
 });
 
