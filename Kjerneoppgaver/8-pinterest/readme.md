@@ -28,6 +28,8 @@ Mappestruktur:
 mini-pinterest/
 ├─ package.json
 ├─ server.js
+└─ public/
+   ├─ style.css
 └─ views/
    ├─ index.ejs
    └─ upload.ejs
@@ -67,6 +69,8 @@ const PORT = 3000;
 // EJS-oppsett
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+//public mappe med css
+app.use(express.static("public"));
 
 // for å lese form-data
 app.use(express.urlencoded({ extended: true }));
@@ -115,23 +119,8 @@ Elevene må lage løkke i EJS for å vise ALLE bilder.
 <head>
   <meta charset="UTF-8">
   <title>mini-pinterest</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .card {
-      border: 1px solid #ddd;
-      padding: 0.5rem;
-      width: 220px;
-    }
-    .card img {
-      max-width: 100%;
-      display: block;
-    }
-  </style>
+ <link rel="stylesheet" href="/style.css">
+
 </head>
 <body>
   <h1>mini-pinterest</h1>
@@ -169,6 +158,8 @@ Denne kan nesten være ferdig – de må bare passe på at `name` matcher det de
 <head>
   <meta charset="UTF-8">
   <title>Legg inn bilde</title>
+  <link rel="stylesheet" href="/style.css">
+
 </head>
 <body>
   <h1>Legg inn bilde-URL</h1>
@@ -192,7 +183,127 @@ Denne kan nesten være ferdig – de må bare passe på at `name` matcher det de
 ```
 
 ---
+## 4.5 Legg til style.css
 
+```css
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+h1 {
+  text-align: center;
+  color: #444;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.caption {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+.owner {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.like-btn {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  transition: background-color 0.2s ease;
+}
+
+.like-btn:hover {
+  background-color: #0056b3;
+}
+
+form {
+  background-color: white;
+  padding: 1.2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+input[type="url"],
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+```
 ## 5. Hva dere MÅ få til i hovedoppgaven
 
 * `posts` skal være et **array**

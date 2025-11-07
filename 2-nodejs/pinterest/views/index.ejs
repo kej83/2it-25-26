@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>mini-pinterest</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .card {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      width: 220px;
+    }
+    .card img {
+      max-width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>mini-pinterest</h1>
+  <p><a href="/upload">Legg til nytt bilde</a></p>
+
+  <% if (!locals.posts) {/* TODO: ELEVEN SKRIVER: hvis posts.length === 0 -> skriv "ingen bilder ennå" */
+   
+  %>
+  <h2>Ingen bilder ennå</h2>
+  <% } else { %>
+    <div class="grid">
+    <% /* TODO: ELEVEN SKRIVER:
+       lag en for-løkke i EJS: for (let i = 0; i < posts.length; i++)
+       vis posts[i].imageUrl og posts[i].caption
+    */ %>
+    <figure>
+    <img src="<%=posts[0].imageUrl%>" alt="">
+    <figcaption><%=posts[0].caption%></figcaption>    
+        </figure>
+    
+  </div>
+  <%} %>
+
+  
+</body>
+</html>
