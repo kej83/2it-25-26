@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ny blogg</h1>
+    <form action="/newblog" method="POST">
+  <label for="tittel">Tittel:</label><br>
+  <input type="text" id="tittel" name="tittel" required><br><br>
+
+  <label for="forfatter">Forfatter:</label><br>
+  <input type="text" id="forfatter" name="forfatter" required><br><br>
+
+  <label for="innhold">Innhold:</label><br>
+  <textarea id="innhold" name="innhold" rows="5" cols="40" required></textarea><br><br>
+
+  <button type="submit">Publiser</button>
+</form>
+</body>
+</html>

@@ -23,6 +23,17 @@ app.get("/", (req, res) => {
    res.render("index.ejs", {blogs});
 });
 
+app.get("/newblog", (req, res) => {
+   res.render("ny_blogg.ejs");
+});
+
+app.post("/newblog", (req, res) => {
+   let nyBlogg = req.body;
+   // sett inn i begynnelsen av arrayet
+   blogs.unshift(nyBlogg);
+   res.render("index.ejs", {blogs});
+});
+
 app.listen(PORT, () => {
   console.log("webblogg kjører på http://localhost:" + PORT);
 });
