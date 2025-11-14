@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>blogg</h1>
+
+    <h2>innlegg</h2>
+
+    <% for(let i=0; i<blogs.length; i++) { %>
+    <h3><%=blogs[i].tittel %></h3>
+    <p>Av <%=blogs[i].forfatter%></p>
+    <p><%=blogs[i].innhold%></p>
+
+    <hr>
+    <% } %>
     
+
+
+    
+
 </body>
 </html>
