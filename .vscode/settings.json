@@ -1,3 +1,16 @@
 {
-    "livePreview.defaultPreviewPath": "/Kjerneoppgaver/3-gjoremal/losning/index.html"
+    "livePreview.defaultPreviewPath": "/Kjerneoppgaver/3-gjoremal/losning/index.html",
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "test",
+            "username": "postgres",
+            "password": "uctoi7p",
+            "database": "skole"
+        }
+    ]
 }
