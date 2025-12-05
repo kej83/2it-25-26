@@ -21,7 +21,7 @@ npm init -y
 ```
 2. Installer moduler
 ```bash
-npm i express pg ejs nodemon
+npm i express pg ejs nodemon dotenv
 ```
 
 ## .env
