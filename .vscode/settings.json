@@ -11,6 +11,17 @@
             "username": "postgres",
             "password": "uctoi7p",
             "database": "skole"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "avinor-connection",
+            "database": "avinor",
+            "username": "postgres",
+            "password": "uctoi7p"
         }
     ]
 }

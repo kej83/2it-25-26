@@ -1,0 +1,12 @@
+{
+  "name": "3.2.3_brukeradm",
+  "version": "1.0.0",
+  "description": "Vi har en database Avinor. Det er en tabell med brukere. Det skal lagres følgende data:\r * fornavn\r * etternavn\r * e-post\r * fødseldato\r * eradmin (true/false)\r * stilling (utvikler)\r * avdeling (sikkerhet, markedsføring, osv.)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
