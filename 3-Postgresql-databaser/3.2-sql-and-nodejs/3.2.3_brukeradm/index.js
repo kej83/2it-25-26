@@ -27,7 +27,29 @@ app.get("/", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    pass
+    // 1. Les inn brukernavn og password fra req.body
+    const user = TODO;
+    const passwd = TODO;
+    // 2. Lag sql kode for å løpe gjennom brukernavn og passord på alle brukerne
+    const sql = TODO;
+  
+    
+    
+    pool.query(sql, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.send("<h1>Database error</h1>");
+            return;
+        }
+          // 3. Bruk for (let bruker of brukere) for å gå gjennom alle brukerne og let etter match.
+        // 4. Hvis riktig bruker/passord, gå til oversikt.ejs. ELSE gi feilmelding.
+        const brukere = result.rows;
+        // Gå gjennom 1 bruker om gangen om let etter match
+        for (TODO) {
+            
+        }
+
+    })
 });
 
 app.listen(PORT, () => {
