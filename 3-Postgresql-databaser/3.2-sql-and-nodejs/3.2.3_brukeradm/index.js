@@ -35,14 +35,16 @@ app.get("/test", (req, res) => {
     });
 });
 
+app.get("/visallebrukere", (req, res) => {
+    // TODO:
+    pass
+})
 app.post("/login", (req, res) => {
     // 1. Les inn brukernavn og password fra req.body
-    const user = TODO;
-    const passwd = TODO;
+    const user = req.body.username;
+    const passwd = req.body.password;
     // 2. Lag sql kode for å løpe gjennom brukernavn og passord på alle brukerne
-    const sql = TODO;
-  
-    
+    const sql = "SELECT * FROM brukere;";
     
     pool.query(sql, (err, result) => {
         if (err) {
@@ -51,13 +53,24 @@ app.post("/login", (req, res) => {
             return;
         }
           // 3. Bruk for (let bruker of brukere) for å gå gjennom alle brukerne og let etter match.
-        // 4. Hvis riktig bruker/passord, gå til oversikt.ejs. ELSE gi feilmelding.
         const brukere = result.rows;
-        // Gå gjennom 1 bruker om gangen om let etter match
-        // for (TODO) {
 
-        // }
+        for(let bruker of brukere) {
+            let riktigPass = bruker.passord;
+            let riktigBruker = bruker.brukernavn;
 
+            if (riktigBruker == user &&
+                riktigPass == passwd
+            ) {
+                // RIKTIG
+                res.render("oversikt.ejs");
+                return; // Avslutt funk
+            }
+        }
+
+        // 4. Hvis riktig bruker/passord, gå til oversikt.ejs. ELSE gi feilmelding.
+        res.send("<h1>FEIL user/pass</h1>");
+     
     })
 });
 
