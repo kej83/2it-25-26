@@ -26,6 +26,15 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
+// MINIMAL database test
+app.get("/test", (req, res) => {
+    let sql = "SELECT * FROM brukere;";
+    pool.query(sql, (err, result) => {
+        const brukere = result.rows;
+        res.send(`<h1>${brukere[0].fornavn}</h1>`);
+    });
+});
+
 app.post("/login", (req, res) => {
     // 1. Les inn brukernavn og password fra req.body
     const user = TODO;
@@ -45,9 +54,9 @@ app.post("/login", (req, res) => {
         // 4. Hvis riktig bruker/passord, gå til oversikt.ejs. ELSE gi feilmelding.
         const brukere = result.rows;
         // Gå gjennom 1 bruker om gangen om let etter match
-        for (TODO) {
-            
-        }
+        // for (TODO) {
+
+        // }
 
     })
 });
