@@ -1,0 +1,264 @@
+/* Reset-ish */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f6f9;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* Layout */
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Header & nav */
+
+.main-header {
+  background: #1f2933;
+  color: #fff;
+  padding: 0.75rem 0;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.main-nav a {
+  color: #e5e7eb;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+
+.main-footer {
+  margin-top: 2rem;
+  border-top: 1px solid #d0d7e2;
+  padding: 1rem 0;
+  font-size: 0.85rem;
+  color: #555;
+  background: #f9fafb;
+}
+
+/* Typography */
+
+h1,
+h2 {
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+/* Forms */
+
+.main-form,
+.filter-form {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.45rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid #d0d7e2;
+  font-size: 0.95rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #d0d7e2;
+  background: #ffffff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #111827;
+  transition: background 0.15s, transform 0.05s;
+}
+
+.btn.primary {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.btn.danger {
+  background: #dc2626;
+  color: #fff;
+  border-color: #b91c1c;
+}
+
+.btn.small {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: #e5e7eb;
+}
+
+.btn.primary:hover {
+  background: #1d4ed8;
+}
+
+.btn.danger:hover {
+  background: #b91c1c;
+  border-color: #991b1b;
+}
+
+/* Table */
+
+.table-section {
+  margin-top: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06);
+}
+
+.data-table thead {
+  background: #e5e7eb;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.actions-cell form {
+  display: inline;
+}
+
+/* Status-farger (bruker class fra EJS: status-på-lager, status-utlånt osv.) */
+
+tr.status-på-lager td {
+  border-left: 4px solid #16a34a;
+}
+
+tr.status-utlånt td {
+  border-left: 4px solid #eab308;
+}
+
+tr.status-til-reparasjon td {
+  border-left: 4px solid #f97316;
+}
+
+tr.status-kassert td {
+  border-left: 4px solid #dc2626;
+}
+
+.info-text {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.error-message {
+  margin: 0.75rem 0 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* Responsiv */
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,53 @@
+<%- include("partials/header") %>
+
+<h2>Registrer nytt utstyr</h2>
+
+<form class="main-form" action="/utstyr/nytt" method="POST">
+  <div class="form-group">
+    <label for="navn">Navn *</label>
+    <input type="text" id="navn" name="navn" required placeholder="Lenovo ThinkPad L15" />
+  </div>
+
+  <div class="form-group">
+    <label for="kategori">Kategori *</label>
+    <input type="text" id="kategori" name="kategori" required placeholder="PC, skjerm, ruter ..." />
+  </div>
+
+  <div class="form-group">
+    <label for="serienummer">Serienummer *</label>
+    <input type="text" id="serienummer" name="serienummer" required />
+  </div>
+
+  <div class="form-group">
+    <label for="innkjopsdato">Innkjøpsdato</label>
+    <input type="date" id="innkjopsdato" name="innkjopsdato" />
+  </div>
+
+  <div class="form-group">
+    <label for="status">Status *</label>
+    <select id="status" name="status" required>
+      <option value="på lager">På lager</option>
+      <option value="utlånt">Utlånt</option>
+      <option value="til reparasjon">Til reparasjon</option>
+      <option value="kassert">Kassert</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="verdi">Verdi (kr)</label>
+    <input type="number" id="verdi" name="verdi" min="0" step="100" />
+  </div>
+
+  <div class="form-group">
+    <label for="kommentar">Kommentar</label>
+    <textarea id="kommentar" name="kommentar" rows="3" placeholder="Tilleggsinformasjon om utstyret"></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn primary">Lagre</button>
+    <a href="/" class="btn">Avbryt</a>
+  </div>
+</form>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,106 @@
+<%- include("partials/header") %>
+
+<h2>Rediger utstyr</h2>
+
+<p class="info-text">
+  Skriv inn ID-en til utstyret du vil redigere. Du finner ID i oversikten på forsiden.
+</p>
+
+<!-- Steg 1: Finn utstyr etter ID -->
+<form class="main-form" method="GET" action="/redigerutstyr">
+  <div class="form-group">
+    <label for="id">Utstyrs-ID</label>
+    <input
+      type="number"
+      id="id"
+      name="id"
+      min="1"
+      placeholder="For eksempel 1, 2, 3..."
+      value="<%= typeof valgtId !== 'undefined' ? valgtId : '' %>"
+      required
+    />
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn primary">Hent utstyr</button>
+  </div>
+</form>
+
+<!-- Feilmelding hvis ID ikke finnes eller DB-feil -->
+<% if (locals.feilmelding) { %>
+  <p class="error-message"><%= feilmelding %></p>
+<% } %>
+
+<% if (locals.item) { %>
+  <h3>Rediger informasjon for ID <%= item.id %></h3>
+
+  <% if (locals.suksess) { %>
+    <p class="success-message"><%= suksess %></p>
+  <% } %>
+
+  <% if (locals.feil) { %>
+    <p class="error-message"><%= feil %></p>
+  <% } %>
+
+  <!-- Steg 2: redigeringsskjema -->
+  <form class="main-form" method="POST" action="/redigerutstyr">
+    <input type="hidden" name="id" value="<%= item.id %>" />
+
+    <div class="form-group">
+      <label for="navn">Navn *</label>
+      <input type="text" id="navn" name="navn" required value="<%= item.navn %>">
+    </div>
+
+    <div class="form-group">
+      <label for="kategori">Kategori *</label>
+      <input type="text" id="kategori" name="kategori" required value="<%= item.kategori %>">
+    </div>
+
+    <div class="form-group">
+      <label for="serienummer">Serienummer *</label>
+      <input type="text" id="serienummer" name="serienummer" required value="<%= item.serienummer %>">
+    </div>
+
+    <div class="form-group">
+      <label for="innkjopsdato">Innkjøpsdato</label>
+      <input
+        type="date"
+        id="innkjopsdato"
+        name="innkjopsdato"
+        value="<% if (item.innkjopsdato) { %><%= item.innkjopsdato.toISOString().substring(0, 10) %><% } %>"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status *</label>
+      <select id="status" name="status" required>
+        <option value="på lager" <%= item.status === "på lager" ? "selected" : "" %>>På lager</option>
+        <option value="utlånt" <%= item.status === "utlånt" ? "selected" : "" %>>Utlånt</option>
+        <option value="til reparasjon" <%= item.status === "til reparasjon" ? "selected" : "" %>>Til reparasjon</option>
+        <option value="kassert" <%= item.status === "kassert" ? "selected" : "" %>>Kassert</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="plassering">Plassering</label>
+      <input type="text" id="plassering" name="plassering" value="<%= item.plassering || '' %>">
+    </div>
+
+    <div class="form-group">
+      <label for="verdi">Verdi (kr)</label>
+      <input type="number" id="verdi" name="verdi" min="0" step="any" value="<%= item.verdi || '' %>">
+    </div>
+
+    <div class="form-group">
+      <label for="kommentar">Kommentar</label>
+      <textarea id="kommentar" name="kommentar" rows="3"><%= item.kommentar || '' %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Lagre endringer</button>
+      <a href="/" class="btn">Avbryt</a>
+    </div>
+  </form>
+<% } %>
+
+<%- include("partials/footer") %>

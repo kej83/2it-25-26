@@ -1,0 +1,80 @@
+<%- include("partials/header") %>
+
+<h2>Lageroversikt – datautstyr</h2>
+
+<section class="filter-section">
+  <form class="filter-form" method="GET" action="/">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select name="status" id="status">
+          <option value="">Alle</option>
+          <option value="på lager">På lager</option>
+          <option value="utlånt">Utlånt</option>
+          <option value="til reparasjon">Til reparasjon</option>
+          <option value="kassert">Kassert</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="kategori">Kategori</label>
+        <input type="text" name="kategori" id="kategori" placeholder="PC, skjerm, ruter ..." />
+      </div>
+
+      <div class="form-group">
+        <label for="sok">Søk</label>
+        <input type="text" name="sok" id="sok" placeholder="Navn eller serienummer" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn primary">Filtrer / søk</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section class="table-section">
+  <% if (locals.utstyr && utstyr.length > 0) { %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Navn</th>
+          <th>Kategori</th>
+          <th>Serienummer</th>
+          <th>Status</th>
+          <th>Plassering</th>
+          <th>Verdi (kr)</th>
+          <th>Innkjøpsdato</th>
+          <th>Handlinger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% utstyr.forEach((item) => { %>
+          <tr class="status-<%= item.status ? item.status.replace(' ', '-') : '' %>">
+            <td><%= item.navn %></td>
+            <td><%= item.kategori %></td>
+            <td><%= item.serienummer %></td>
+            <td><%= item.status %></td>
+            <td><%= item.plassering %></td>
+            <td><%= item.verdi %></td>
+            <td>
+              <% if (item.innkjopsdato) { %>
+                <%= item.innkjopsdato.toISOString ? item.innkjopsdato.toISOString().substring(0, 10) : item.innkjopsdato %>
+              <% } %>
+            </td>
+            <td class="actions-cell">
+              <a class="btn small" href="/utstyr/<%= item.id %>/rediger">Rediger</a>
+              <form action="/utstyr/<%= item.id %>/slett" method="POST" onsubmit="return confirm('Er du sikker på at du vil slette dette utstyret?');">
+                <button type="submit" class="btn small danger">Slett</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Ingen utstyrsposter funnet. <a href="/utstyr/nytt">Registrer det første utstyret</a>.</p>
+  <% } %>
+</section>
+
+<%- include("partials/footer") %>
