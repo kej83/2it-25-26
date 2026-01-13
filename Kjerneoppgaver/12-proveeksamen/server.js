@@ -24,119 +24,121 @@ const pool = new pg.Pool({
   database: process.env.PGDATABASE
 });
 
-// Hjelpefunksjon: render med biler (callback-stil)
-function renderIndex(res, biler, infoText = "", sokText = "") {
-  res.render("index", { biler, infoText, sokText });
-}
-
-// Forside (viser bare knappene og skjemaene, ingen liste)
+// Forside
 app.get("/", (req, res) => {
-  renderIndex(res, [], "Trykk 'Vis alle biler' for å hente fra databasen.");
+  res.render("index", {
+    biler: [],
+    infoText: "Trykk 'Vis alle biler' for å hente biler fra databasen."
+  });
 });
 
-// Knapp: Vis alle biler
+// Vis alle biler
 app.get("/visbiler", (req, res) => {
   pool.query("SELECT * FROM biler ORDER BY id ASC", (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Databasefeil ved henting av biler.");
     }
-    renderIndex(res, result.rows, "Viser alle biler.");
-  });
-});
 
-// Søk (POST – ingen querystring)
-app.post("/sokbiler", (req, res) => {
-  const sok = (req.body.sok || "").trim();
-
-  const sql = `
-    SELECT * FROM biler
-    WHERE merke ILIKE $1 OR modell ILIKE $1
-    ORDER BY id ASC
-  `;
-  const params = [`%${sok}%`];
-
-  pool.query(sql, params, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Databasefeil ved søk.");
-    }
-    renderIndex(res, result.rows, `Søkeresultat for: "${sok}"`, sok);
-  });
-});
-
-// Legg til bil
-app.post("/leggtil", (req, res) => {
-  const { merke, modell, pris, km, aar } = req.body;
-
-  const sql = `
-    INSERT INTO biler (merke, modell, pris, km, aar)
-    VALUES ($1, $2, $3, $4, $5)
-  `;
-  const params = [merke, modell, pris, km, aar];
-
-  pool.query(sql, params, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Databasefeil ved innsetting.");
-    }
-
-    // Etterpå: hent og vis alle biler igjen
-    pool.query("SELECT * FROM biler ORDER BY id ASC", (err2, result2) => {
-      if (err2) {
-        console.error(err2);
-        return res.status(500).send("Databasefeil etter innsetting.");
-      }
-      renderIndex(res, result2.rows, "Bil lagt til!");
+    res.render("index", {
+      biler: result.rows,
+      infoText: "Viser alle biler."
     });
   });
 });
 
-// Oppdater bil (id kommer fra input-felt)
-app.post("/oppdater", (req, res) => {
-  const { id, merke, modell, pris, km, aar } = req.body;
+// Søk på merke
+app.post("/sokmerke", (req, res) => {
+  const merke = (req.body.merke || "").trim();
 
-  const sql = `
-    UPDATE biler
-    SET merke = $1, modell = $2, pris = $3, km = $4, aar = $5
-    WHERE id = $6
-  `;
-  const params = [merke, modell, pris, km, aar, id];
-
-  pool.query(sql, params, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Databasefeil ved oppdatering.");
-    }
-
-    pool.query("SELECT * FROM biler ORDER BY id ASC", (err2, result2) => {
-      if (err2) {
-        console.error(err2);
-        return res.status(500).send("Databasefeil etter oppdatering.");
+  pool.query(
+    "SELECT * FROM biler WHERE merke ILIKE $1 ORDER BY id ASC",
+    [`%${merke}%`],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Databasefeil ved søk på merke.");
       }
-      renderIndex(res, result2.rows, `Bil #${id} oppdatert!`);
-    });
-  });
+
+      res.render("index", {
+        biler: result.rows,
+        infoText: `Søkeresultat for merke: "${merke}"`
+      });
+    }
+  );
 });
 
-// Slett bil (id kommer fra input-felt)
-app.post("/slett", (req, res) => {
-  const { id } = req.body;
+// Søk på år
+app.post("/sokaar", (req, res) => {
+  const aar = Number(req.body.aar);
 
-  pool.query("DELETE FROM biler WHERE id = $1", [id], (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Databasefeil ved sletting.");
-    }
-
-    pool.query("SELECT * FROM biler ORDER BY id ASC", (err2, result2) => {
-      if (err2) {
-        console.error(err2);
-        return res.status(500).send("Databasefeil etter sletting.");
-      }
-      renderIndex(res, result2.rows, `Bil #${id} slettet!`);
+  // ENKEL FEILHÅNDTERING (uten helper-funksjon)
+  if (!aar) {
+    return res.render("index", {
+      biler: [],
+      infoText: "Du må skrive inn et årstall (tall)."
     });
-  });
+  }
+
+  pool.query(
+    "SELECT * FROM biler WHERE aar = $1 ORDER BY id ASC",
+    [aar],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Databasefeil ved søk på år.");
+      }
+
+      res.render("index", {
+        biler: result.rows,
+        infoText: `Søkeresultat for år: ${aar}`
+      });
+    }
+  );
+});
+
+// Endre pris (ID + ny pris)
+app.post("/endrepris", (req, res) => {
+  const id = Number(req.body.id);
+  const pris = Number(req.body.pris);
+
+  if (!id || !pris) {
+    return res.render("index", {
+      biler: [],
+      infoText: "Du må skrive inn både ID og ny pris (tall)."
+    });
+  }
+
+  pool.query(
+    "UPDATE biler SET pris = $1 WHERE id = $2",
+    [pris, id],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Databasefeil ved oppdatering av pris.");
+      }
+
+      if (result.rowCount === 0) {
+        return res.render("index", {
+          biler: [],
+          infoText: `Fant ingen bil med ID ${id}.`
+        });
+      }
+
+      // Vis alle biler etter oppdatering
+      pool.query("SELECT * FROM biler ORDER BY id ASC", (err2, result2) => {
+        if (err2) {
+          console.error(err2);
+          return res.status(500).send("Databasefeil etter oppdatering.");
+        }
+
+        res.render("index", {
+          biler: result2.rows,
+          infoText: `Pris oppdatert for bil ID ${id}.`
+        });
+      });
+    }
+  );
 });
 
 const port = Number(process.env.PORT || 3000);
