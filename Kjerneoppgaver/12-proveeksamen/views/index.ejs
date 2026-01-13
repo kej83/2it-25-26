@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biler (MWE)</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Biler</h1>
+
+    <% if (infoText) { %>
+      <p class="info"><%= infoText %></p>
+    <% } %>
+
+    <!-- KNAPPER (GET-ruter) -->
+    <section class="card">
+      <h2>Meny</h2>
+      <div class="row">
+        <form method="GET" action="/visbiler">
+          <button type="submit">Vis alle biler</button>
+        </form>
+
+        <form method="GET" action="/">
+          <button type="submit" class="secondary">Til forsiden</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SØK (POST – ingen querystring) -->
+    <section class="card">
+      <h2>Søk i biler</h2>
+      <form method="POST" action="/sokbiler" class="row">
+        <input type="text" name="sok" placeholder="Søk på merke eller modell..." value="<%= sokText %>"/>
+        <button type="submit">Søk</button>
+      </form>
+    </section>
+
+    <!-- LEGG TIL -->
+    <section class="card">
+      <h2>Legg til bil</h2>
+      <form method="POST" action="/leggtil" class="grid">
+        <label>Merke
+          <input type="text" name="merke" required />
+        </label>
+
+        <label>Modell
+          <input type="text" name="modell" required />
+        </label>
+
+        <label>Pris
+          <input type="number" step="0.01" name="pris" required />
+        </label>
+
+        <label>Km
+          <input type="number" name="km" required />
+        </label>
+
+        <label>År
+          <input type="number" name="aar" required />
+        </label>
+
+        <div class="actions">
+          <button type="submit">Legg til</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- LISTE + ENDRE/SLETT -->
+    <section class="card">
+      <h2>Resultat (<%= biler.length %>)</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Merke</th>
+            <th>Modell</th>
+            <th>Pris</th>
+            <th>Km</th>
+            <th>År</th>
+            <th>Handling</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (biler.length === 0) { %>
+            <tr><td colspan="7" class="muted">Ingen biler å vise.</td></tr>
+          <% } %>
+
+          <% biler.forEach(bil => { %>
+            <tr>
+              <!-- OPPDATER: id er et input-felt (readonly) -->
+              <form method="POST" action="/oppdater">
+                <td>
+                  <input class="small" type="number" name="id" value="<%= bil.id %>" readonly />
+                </td>
+                <td><input type="text" name="merke" value="<%= bil.merke %>"></td>
+                <td><input type="text" name="modell" value="<%= bil.modell %>"></td>
+                <td><input type="number" step="0.01" name="pris" value="<%= bil.pris %>"></td>
+                <td><input type="number" name="km" value="<%= bil.km %>"></td>
+                <td><input type="number" name="aar" value="<%= bil.aar %>"></td>
+                <td class="actions-cell">
+                  <button type="submit">Lagre</button>
+              </form>
+
+              <!-- SLETT: eget skjema med id input -->
+              <form method="POST" action="/slett" class="inline">
+                <input type="hidden" name="id" value="<%= bil.id %>"/>
+                <button class="danger" type="submit" onclick="return confirm('Slette bil #<%= bil.id %>?')">
+                  Slett
+                </button>
+              </form>
+                </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <!-- SLETT MED MANUELL ID (hvis du vil vise konseptet tydelig) -->
+      <div class="divider"></div>
+      <h3>Slett bil (med ID)</h3>
+      <form method="POST" action="/slett" class="row">
+        <input type="number" name="id" placeholder="Skriv ID..." required />
+        <button type="submit" class="danger">Slett</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

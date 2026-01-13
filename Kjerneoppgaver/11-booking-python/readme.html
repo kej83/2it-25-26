@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%F0%9F%8F%A8-handout-%E2%80%93-enkelt-bookingsystem-i-python-liste">🏨 Handout – Enkelt bookingsystem i Python (liste)</h1>
+<h2 id="m%C3%A5l">Mål</h2>
+<p>Du skal lage et enkelt <strong>hotell-bookingsystem</strong> i Python ved å bruke:</p>
+<ul>
+<li><code>list</code></li>
+<li><code>for</code>-løkker</li>
+<li><code>while</code>-løkke</li>
+<li><code>if / else</code></li>
+<li>funksjoner</li>
+<li><code>input()</code> og <code>print()</code></li>
+</ul>
+<p>Du skal <strong>ikke bruke dictionary (<code>dict</code>)</strong>.</p>
+<hr>
+<h2 id="hvordan-hotellet-fungerer">Hvordan hotellet fungerer</h2>
+<ul>
+<li>
+<p>Hotellet har <strong>8 rom</strong></p>
+</li>
+<li>
+<p>Alle rom lagres i <strong>én liste</strong></p>
+</li>
+<li>
+<p><strong>Index 0 = rom 1</strong>, index 1 = rom 2 osv.</p>
+</li>
+<li>
+<p>Et rom er:</p>
+<ul>
+<li><code>None</code> → ledig</li>
+<li><code>&quot;Navn&quot;</code> → booket</li>
+</ul>
+</li>
+<li>
+<p>Ved booking lagres <strong>kun fornavn</strong></p>
+</li>
+</ul>
+<hr>
+<h2 id="oppgaver-gj%C3%B8r-dem-i-denne-rekkef%C3%B8lgen">Oppgaver (gjør dem i denne rekkefølgen)</h2>
+<h3 id="oppgave-1-%E2%80%93-forst%C3%A5-datastrukturen">Oppgave 1 – Forstå datastrukturen</h3>
+<p>Se på hotell-listen i koden:</p>
+<ul>
+<li>Finn ut hva <code>None</code> betyr</li>
+<li>Finn ut hvordan du regner om fra <strong>index → romnummer</strong></li>
+<li>Finn ut hvordan du regner om fra <strong>romnummer → index</strong></li>
+</ul>
+<hr>
+<h3 id="oppgave-2-%E2%80%93-vis-antall-opptatte-rom">Oppgave 2 – Vis antall opptatte rom</h3>
+<p>Lag funksjonen <code>vis_antall_opptatte_rom</code>:</p>
+<ul>
+<li>Gå gjennom listen</li>
+<li>Tell hvor mange rom som <strong>ikke</strong> er <code>None</code></li>
+<li>Skriv ut antallet</li>
+</ul>
+<hr>
+<h3 id="oppgave-3-%E2%80%93-vis-antall-ledige-rom">Oppgave 3 – Vis antall ledige rom</h3>
+<p>Lag funksjonen <code>vis_antall_ledige_rom</code>:</p>
+<ul>
+<li>Gå gjennom listen</li>
+<li>Tell hvor mange rom som er <code>None</code></li>
+<li>Skriv ut antallet</li>
+</ul>
+<hr>
+<h3 id="oppgave-4-%E2%80%93-s%C3%B8k-p%C3%A5-gjest">Oppgave 4 – Søk på gjest</h3>
+<p>Lag funksjonen <code>sok_pa_gjest</code>:</p>
+<ul>
+<li>
+<p>Spør brukeren om et fornavn</p>
+</li>
+<li>
+<p>Søk gjennom listen</p>
+</li>
+<li>
+<p>Hvis navnet finnes:</p>
+<ul>
+<li>Skriv ut hvilket rom gjesten bor på</li>
+</ul>
+</li>
+<li>
+<p>Hvis navnet ikke finnes:</p>
+<ul>
+<li>Skriv ut en passende melding</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="oppgave-5-%E2%80%93-book-rom">Oppgave 5 – Book rom</h3>
+<p>Lag funksjonen <code>book_rom</code>:</p>
+<ul>
+<li>
+<p>Spør brukeren om fornavn</p>
+</li>
+<li>
+<p>Finn <strong>første ledige rom</strong></p>
+</li>
+<li>
+<p>Legg inn navnet i listen</p>
+</li>
+<li>
+<p>Hvis alle rom er opptatt:</p>
+<ul>
+<li>Skriv ut en beskjed</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="oppgave-6-%E2%80%93-sjekk-ut-av-rom">Oppgave 6 – Sjekk ut av rom</h3>
+<p>Lag funksjonen <code>sjekk_ut</code>:</p>
+<ul>
+<li>
+<p>Spør etter romnummer (1–8)</p>
+</li>
+<li>
+<p>Regn om til index</p>
+</li>
+<li>
+<p>Hvis rommet er opptatt:</p>
+<ul>
+<li>Sett plassen i listen til <code>None</code></li>
+</ul>
+</li>
+<li>
+<p>Hvis rommet er ledig:</p>
+<ul>
+<li>Skriv ut en melding</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="oppgave-7-%E2%80%93-endre-rom-vanskeligst">Oppgave 7 – Endre rom (vanskeligst)</h3>
+<p>Lag funksjonen <code>endre_rom</code>:</p>
+<ul>
+<li>
+<p>Spør etter romnummeret gjesten er på</p>
+</li>
+<li>
+<p>Spør etter nytt romnummer</p>
+</li>
+<li>
+<p>Regn om til index</p>
+</li>
+<li>
+<p>Regler:</p>
+<ul>
+<li>Det gamle rommet må være opptatt</li>
+<li>Det nye rommet må være ledig</li>
+</ul>
+</li>
+<li>
+<p>Flytt navnet fra gammelt rom til nytt rom</p>
+</li>
+</ul>
+<hr>
+<h2 id="startkode-all-kode-samlet">Startkode (all kode samlet)</h2>
+<pre class="hljs"><code><div><span class="hljs-comment"># bookingsystem.py</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lag_hotell</span><span class="hljs-params">()</span>:</span>
+    hotell = [<span class="hljs-literal">None</span>] * <span class="hljs-number">8</span>
+    <span class="hljs-keyword">return</span> hotell
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">legg_inn_startbookinger</span><span class="hljs-params">(hotell)</span>:</span>
+    hotell[<span class="hljs-number">0</span>] = <span class="hljs-string">"Nora"</span>   <span class="hljs-comment"># rom 1</span>
+    hotell[<span class="hljs-number">2</span>] = <span class="hljs-string">"Emil"</span>   <span class="hljs-comment"># rom 3</span>
+    hotell[<span class="hljs-number">5</span>] = <span class="hljs-string">"Sara"</span>   <span class="hljs-comment"># rom 6</span>
+    hotell[<span class="hljs-number">7</span>] = <span class="hljs-string">"Odin"</span>   <span class="hljs-comment"># rom 8</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vis_oversikt</span><span class="hljs-params">(hotell)</span>:</span>
+    print(<span class="hljs-string">"\n--- ROMOVERSIKT ---"</span>)
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(hotell)):
+        romnr = i + <span class="hljs-number">1</span>
+        <span class="hljs-keyword">if</span> hotell[i] <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            print(<span class="hljs-string">f"Rom <span class="hljs-subst">{romnr}</span>: LEDIG"</span>)
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">f"Rom <span class="hljs-subst">{romnr}</span>: OPPTATT av <span class="hljs-subst">{hotell[i]}</span>"</span>)
+    print(<span class="hljs-string">"-------------------\n"</span>)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vis_antall_opptatte_rom</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 2</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">vis_antall_ledige_rom</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 3</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sok_pa_gjest</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 4</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">book_rom</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 5</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sjekk_ut</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 6</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">endre_rom</span><span class="hljs-params">(hotell)</span>:</span>
+    <span class="hljs-comment"># OPPGAVE 7</span>
+    <span class="hljs-keyword">pass</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">skriv_meny</span><span class="hljs-params">()</span>:</span>
+    print(<span class="hljs-string">"=== BOOKINGSYSTEM ==="</span>)
+    print(<span class="hljs-string">"1) Vis oversikt"</span>)
+    print(<span class="hljs-string">"2) Vis antall opptatte rom"</span>)
+    print(<span class="hljs-string">"3) Vis antall ledige rom"</span>)
+    print(<span class="hljs-string">"4) Søk på gjest"</span>)
+    print(<span class="hljs-string">"5) Book rom"</span>)
+    print(<span class="hljs-string">"6) Sjekk ut av rom"</span>)
+    print(<span class="hljs-string">"7) Endre rom"</span>)
+    print(<span class="hljs-string">"0) Avslutt"</span>)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    hotell = lag_hotell()
+    legg_inn_startbookinger(hotell)
+
+    valg = <span class="hljs-number">-1</span>
+    <span class="hljs-keyword">while</span> valg != <span class="hljs-number">0</span>:
+        skriv_meny()
+        valg = int(input(<span class="hljs-string">"Velg: "</span>))
+
+        <span class="hljs-keyword">if</span> valg == <span class="hljs-number">1</span>:
+            vis_oversikt(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">2</span>:
+            vis_antall_opptatte_rom(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">3</span>:
+            vis_antall_ledige_rom(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">4</span>:
+            sok_pa_gjest(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">5</span>:
+            book_rom(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">6</span>:
+            sjekk_ut(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">7</span>:
+            endre_rom(hotell)
+        <span class="hljs-keyword">elif</span> valg == <span class="hljs-number">0</span>:
+            print(<span class="hljs-string">"Avslutter..."</span>)
+        <span class="hljs-keyword">else</span>:
+            print(<span class="hljs-string">"Ugyldig valg"</span>)
+
+
+main()
+</div></code></pre>
+
+</body>
+</html>
