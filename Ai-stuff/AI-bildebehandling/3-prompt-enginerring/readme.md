@@ -1,8 +1,12 @@
 # Elevhandout: Bildeserie i ComfyUI – Image prompt engineering (Z-Image Turbo)
 
-## Dette er det eneste dere skal gjøre i denne oppgaven
+## Guiden er her:
+- [Prompt engineering for images](https://www.scribd.com/document/698689874/Creating-Photorealistic-Images-With-AI-V1)
+
+Guiden kan leses direkte på nettsiden. Trenger ikke å lage bruker for å laste ned osv.
+## Dette er det dere skal gjøre i denne oppgaven
 Dere skal:
-- bruke begreper fra guiden **“Creating photorealistic images with ai.pdf”**:  
+- bruke begreper fra guiden **“Creating photorealistic images with ai.pdf”**: Som f.eks. 
   **fotostil, kameravinkel, framing, setting/bakgrunn, lighting, kamera-innstillinger**
 - dokumentere arbeidet med **skjermklipp + kort forklaring** i et dokument som leveres som **PDF**
 
