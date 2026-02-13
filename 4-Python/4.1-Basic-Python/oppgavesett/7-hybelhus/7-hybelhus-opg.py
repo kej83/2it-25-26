@@ -1,88 +1,110 @@
-# hybelhus.py - Et uferdig system for administrasjon av studentboliger
+import random
 
-# Oppstartsfunksjon: Oppretter data-strukturen og fyller den med startverdier
+# --- GLOBAL VARIABEL ---
+hus_data = []
+
 def generer_hybelhus():
     """
-    Oppretter et hybelhus med 3 etasjer.
-    Hver etasje har rom (f.eks. 101, 102...).
-    Hvert rom starter med en liste over studenter (maks 3).
+    Oppretter et hybelhus som en liste med ordbøker.
+    Hver ordbok representerer et rom:
+    {"etasje": 1, "romnr": 101, "studenter": ["Navn", "Navn"]}
     """
-    hus = {}
-    import random
+    midlertidig_hus = []
     
     for etasje in range(1, 4):
-        hus[etasje] = {}
         antall_rom = random.randint(8, 12)
         for r in range(1, antall_rom + 1):
             rom_nummer = (etasje * 100) + r
-            # Tilfeldig fylling: Noen er tomme, noen har 1-3 studenter
-            tilfelle = random.random()
-            if tilfelle < 0.2: # 20% sjanse for tomt rom
-                studenter = []
-            elif tilfelle < 0.6:
-                studenter = ["Student A"]
-            else:
-                studenter = ["Student A", "Student B"]
             
-            hus[etasje][rom_nummer] = studenter
-    return hus
+            # Tilfeldig fylling av studenter
+            tilfelle = random.random()
+            if tilfelle < 0.2:
+                beboere = []
+            elif tilfelle < 0.6:
+                beboere = ["Student A"]
+            else:
+                beboere = ["Student A", "Student B"]
+            
+            # Lager selve "rom-objektet" (ordboken)
+            nytt_rom = {
+                "etasje": etasje,
+                "romnr": rom_nummer,
+                "studenter": beboere
+            }
+            midlertidig_hus.append(nytt_rom)
+            
+    return midlertidig_hus
 
-# --- OPPGAVER FOR ELEVENE: FYLL INN LOGIKKEN I FUNKSJONENE UNDER ---
+# Fyller den globale variabelen ved oppstart
+hus_data = generer_hybelhus()
 
-def vis_alle_rom(data):
-    """Skriver ut en oversikt over alle rom og hvem som bor der."""
-    print("\n--- Oversikt over hybelhuset ---")
-    # TODO: Loop gjennom etasjer og rom, skriv ut romnummer og beboere
+# --- EKSEMPEL: FUNKSJON FERDIG UTFØRT ---
+
+def vis_alle_rom():
+    """Skriver ut en oversikt over alle rom, etasje og beboere."""
+    print("\n--- OVERSIKT OVER ALLE HYBLER ---")
+    
+    # Siden hus_data er en liste, bruker vi en enkel for-løkke
+    for rom in hus_data:
+        etasje = rom["etasje"]
+        nr = rom["romnr"]
+        beboere = rom["studenter"]
+        
+        # Formaterer beboer-listen til en tekststreng
+        beboer_tekst = ", ".join(beboere) if beboere else "TOMT"
+        
+        print(f"Etasje {etasje} | Rom {nr:3} | Beboere: {beboer_tekst}")
+
+# --- OPPGAVER FOR ELEVENE: FYLL INN LOGIKKEN ---
+
+def flytt_inn():
+    """Spør om navn og romnr, og legger studenten til hvis det er plass (maks 3), og at romnr faktisk finnes!."""
+    # TODO: Be om input for navn og romnummer.
+    navn = input("navn: ")
+    romnr = int(input("romnr: "))
+    # Hint: Loop gjennom hus_data for å finne riktig "romnr".
     pass
 
-def flytt_inn(data):
-    """Spør om navn og romnr, og legger studenten til hvis det er plass (maks 3)."""
-    # TODO: Be om input for navn og romnummer. 
-    # Sjekk om rommet eksisterer og om det er ledig plass.
-    pass
-
-def flytt_ut(data):
+def flytt_ut():
     """Fjerner en student fra et bestemt rom basert på navn."""
-    # TODO: Be om navn og romnummer, fjern studenten fra lista i det rommet.
+    # TODO: Be om navn og romnummer, finn rommet og fjern navnet fra 'studenter'-lista.
     pass
 
-def finn_student(data):
+def finn_student():
     """Søker etter en student ved navn og returnerer romnummeret."""
-    # TODO: Loop gjennom alt for å finne studenten, skriv ut romnummeret.
+    # TODO: Loop gjennom alle rom og sjekk om navnet finnes i 'studenter'-lista.
     pass
 
-def tell_ledige_plasser(data):
+def tell_ledige_plasser():
     """Beregner og skriver ut totalt antall ledige sengeplasser i huset."""
-    # TODO: Tell hvor mange ledige "slots" (3 minus antall beboere) som finnes totalt.
+    # TODO: Hvert rom har plass til 3. Tell totalt (3 - antall_beboere) for alle rom.
     pass
 
-def oversikt_etasje(data):
+def oversikt_etasje():
     """Viser status kun for en spesifikk etasje valgt av brukeren."""
-    # TODO: Be om etasje (1-3) og vis kun rommene der.
+    # TODO: Be om etasje (1-3). Loop gjennom og print bare hvis "etasje" stemmer.
     pass
 
-def lagre_til_fil(data):
+def lagre_til_fil():
     """Lagrer hus-oversikten til en tekstfil."""
-    # TODO: Skriv dataene til 'hybelstatus.txt' på en ryddig måte.
+    # TODO: Åpne 'hybelstatus.txt' og skriv inn dataene.
     pass
 
-def slett_alle_i_rom(data):
+def slett_alle_i_rom():
     """Tømmer et helt rom for studenter (f.eks. ved utvask)."""
-    # TODO: Be om romnummer og sett lista for dette rommet til å være tom [].
+    # TODO: Finn riktig rom via romnr og sett 'studenter' = []
     pass
 
 # --- HJELPEFUNKSJONER ---
 
-def valider_rom(data, rom_nr):
-    """Hjelpefunksjon: Sjekker om et romnummer faktisk eksisterer i huset."""
-    # TODO: Returner True hvis rommet finnes, ellers False.
+def valider_rom(rom_nr):
+    """Sjekker om et romnummer faktisk eksisterer i huset."""
+    # TODO: Returner True hvis rommet finnes i lista, ellers False.
     return True
 
 # --- HOVEDMENY ---
 
 def meny():
-    hus_data = generer_hybelhus()
-    
     while True:
         print("\n=== VELKOMMEN TIL STUDENTBYEN ===")
         print("1. Vis alle rom")
@@ -97,14 +119,14 @@ def meny():
         
         valg = input("\nVelg handling (1-9): ")
         
-        if valg == "1": vis_alle_rom(hus_data)
-        elif valg == "2": flytt_inn(hus_data)
-        elif valg == "3": flytt_ut(hus_data)
-        elif valg == "4": finn_student(hus_data)
-        elif valg == "5": tell_ledige_plasser(hus_data)
-        elif valg == "6": oversikt_etasje(hus_data)
-        elif valg == "7": slett_alle_i_rom(hus_data)
-        elif valg == "8": lagre_til_fil(hus_data)
+        if valg == "1": vis_alle_rom()
+        elif valg == "2": flytt_inn()
+        elif valg == "3": flytt_ut()
+        elif valg == "4": finn_student()
+        elif valg == "5": tell_ledige_plasser()
+        elif valg == "6": oversikt_etasje()
+        elif valg == "7": slett_alle_i_rom()
+        elif valg == "8": lagre_til_fil()
         elif valg == "9": 
             print("Program avsluttes. Ha en fin dag!")
             break
@@ -113,14 +135,3 @@ def meny():
 
 if __name__ == "__main__":
     meny()
-
-
-### Tips til elevene for å komme i gang:
-
-# * **Datastrukturen:** `data` er en ordbok der nøklene er etasjenummer (1, 2, 3). Verdien til hver etasje er en ny ordbok med romnummer som nøkler.
-# * **Eksempel:** For å få tak i studentene på rom 101, skriver man `data[1][101]`. Dette gir deg en `liste`.
-# * **Løkker:** For å vise alle rom må man bruke en "nøstet" løkke:
-
-for etasje, rommene in data.items():
-    for rom_nr, studenter in rommene.items():
-        # Her kan du printe ut informasjonen
