@@ -63,7 +63,17 @@ def flytt_inn():
     navn = input("navn: ")
     romnr = int(input("romnr: "))
     # Hint: Loop gjennom hus_data for å finne riktig "romnr".
-    pass
+    lagtTil = False
+    for rom in hus_data:
+        if rom["romnr"] == romnr:
+            if len(rom["studenter"]) <= 2:
+                rom["studenter"].append(navn)
+                lagtTil = True
+    
+    if lagtTil:
+        print(f"{navn} flyttet inn på {romnr}.")
+    else:
+        print(f"Noe gikk galt. Sjekk gyldig romnr og antall studenter på rommet.")
 
 def flytt_ut():
     """Fjerner en student fra et bestemt rom basert på navn."""
