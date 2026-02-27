@@ -51,7 +51,10 @@ app.post("/send-code", async (req, res) => {
         res.render("verify", {email});
     } catch(err) {
         console.error("Feil ved sending av e-post:", err);
-        res.render("index", {error: "feil med e-post sending."})
+        res.render("index.ejs", {error: "feil med e-post sending."})
     }
 });
 
+app.listen(PORT, () => {
+  console.log(`Server kjører på http://localhost:${PORT}`);
+});
