@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Star Wars planeter</h1>
+
+    <label for="inpPlanet">Planet:</label>
+    <input type="text" id="inpPlanet">
+    <button onclick="visPlaneter()">Vis alle planeter</button>
+    <button onclick="sokPlanet()">Søk på planet</button>
+
+    <div id="resultat"></div>
+    <script>
+        function visPlaneter() {
+            let txtHTML = "<h2>Alle planeter</h2>";
+            
+
+            fetch("https://swapi.info/api/planets")
+  .then((res) => res.json())
+  .then((json) => {
+    console.log(json);
+    // Gå gjennom planetene
+    for(let planet of json) {
+        // Lag overskrift og ul for hver planet
+        txtHTML += `<h3>${planet.name}</h3>`;
+        txtHTML += "<ul>";
+        txtHTML += `<li>Populasjon: ${planet.population}</li>`;
+        txtHTML += `<li>Klima: ${planet.climate}</li>`;
+        txtHTML += `<li>Gravitasjon:  ${planet.gravity}</li>`;
+        txtHTML += "</ul>";
+    };
+    resultat.innerHTML = txtHTML;
+
+  })
+  .catch((error) => console.error(error))
+        }
+
+        function sokPlanet() {
+            TODO
+        } 
+
+        let inpPlanet = document.getElementById("inpPlanet");
+        let resultat = document.getElementById("resultat");
+    </script>
+</body>
+</html>
