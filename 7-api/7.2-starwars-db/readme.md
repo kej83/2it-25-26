@@ -45,4 +45,44 @@ Fyll nå tabellene med Star Wars data. Bruk data fra api-et! Bruk KI eller api-r
 3. **Relasjoner:**
 * **Mange-til-En:** Mange personer kan komme fra samme planet. Dette løser dere ved å legge `planet_id` i `people`-tabellen.
 
+## Del 2: nodejs app
+Lag en nettside med knapper. Hver knapp tilsvarer en av disse oppgavene. Nodejs-appen skal kommunisere med databaseserveren din og hente data derfra.
+
+Bruk SQL-spørringer for å hente ut riktig informasjon fra databasen din.
+
+### Nivå: Rekrutt (Kun SELECT)
+
+1. **Navneliste:** Hent ut en liste over alle navnene i `people`-tabellen.
+2. **Planet-info:** Hent ut navn, terreng og populasjon for alle planeter i `planets`.
+3. **Artenes oversikt:** Vis navnet og språket til alle artene i `species`.
+4. **Karakter-detaljer:** Hent ut både navn og fødselsår for alle karakterene.
+
+### Nivå: Padawan (Enkel WHERE)
+
+5. **Blått blikk:** Finn navnet på alle karakterer som har blå øyne (`blue`).
+6. **Ørkensand:** Finn alle planeter som har terreng (`terrain`) som er nøyaktig `desert`.
+7. **Hjemme hos ID 1:** Finn alle karakterer som er knyttet til `planet_id` nummer 1.
+8. **Høyvekst:** Finn navnet på alle karakterer som er høyere enn 200 cm.
+
+### Nivå: Jedi-ridder (Mønster og Logikk)
+
+9. **Skywalker-slekten:** Bruk `LIKE` for å finne alle karakterer som har et navn som starter på "Skywalker".
+10. **Farlig klima:** Finn alle planeter som har et klima som er *enten* `frozen` eller `murky`.
+11. **Små roboter:** Finn alle karakterer som har `species_id` for Droid (finn tallet først!) OG som er lavere enn 100 cm.
+12. **Befolkningssjokk:** Finn alle planeter som har mer enn 1 milliard innbyggere (Tips: `population > 1000000000`).
+
+---
+
+### Verktøykasse for oppgavene
+
+| SQL-kommando | Bruksområde |
+| --- | --- |
+| **`SELECT kolonne_navn`** | Velger hvilke "overskrifter" du vil se. |
+| **`SELECT *`** | Velger **alt** (alle kolonner) i tabellen. |
+| **`FROM tabell_navn`** | Forteller hvilken tabell du skal hente fra. |
+| **`WHERE`** | Brukes for å filtrere slik at du bare ser radene som passer kravet ditt. |
+| **`AND` / `OR**` | Brukes for å kombinere flere krav i samme `WHERE`. |
+
+
+
 
