@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    <% if(locals.error) { %>
+    <h1>Feil med logg inn</h1>
+    <h2><%= error %></h2>
+    <% } else { %>
+    
     <h1>Logg inn</h1>
 
     <form action="/send-code" method="post">
@@ -14,5 +19,6 @@
         <br>
         <input type="submit" value="Logg inn">
     </form>
+    <% } %>
 </body>
 </html>
